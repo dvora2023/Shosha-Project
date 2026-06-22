@@ -1,0 +1,19 @@
+<div class="products-page">
+  <h1 class="page-title">{{ categoryName() }}</h1>
+
+  <div *ngIf="loading()" class="loading">טוען מוצרים...</div>
+
+  <div *ngIf="!loading() && arr().length === 0" class="empty">
+    אין מוצרים בקטגוריה זו
+  </div>
+
+  <div class="products-grid" *ngIf="!loading() && arr().length > 0">
+    @for (item of arr(); track item._id) {
+      <div class="product-card" (click)="goToProduct(item._id)">
+        <img [src]="item.image" [alt]="item.name">
+        <h3 class="product-name">{{ item.name }}</h3>
+        <p class="product-price">{{ item.price }}₪</p>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,55 @@
+.category-page {
+  background-color: #f0ebe3;
+  min-height: 70vh;
+  padding: 40px 20px;
+  font-family: 'Georgia', serif;
+  text-align: center;
+}
+
+.page-title {
+  color: #7ab49a;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 30px;
+}
+
+.category-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.03);
+}
+
+.category-name {
+  color: #7ab49a;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.btn-add {
+  background-color: #7ab49a;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-add:hover {
+  background-color: #5a9478;
+}

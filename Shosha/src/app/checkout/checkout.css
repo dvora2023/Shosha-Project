@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;600&display=swap');
+
+:host {
+  display: block;
+  background: #e8e4dc;
+  min-height: 100vh;
+}
+
+.checkout-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  font-family: 'Lato', sans-serif;
+}
+
+/* ── Header ── */
+.checkout-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.checkout-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6aaa8a;
+  margin: 0;
+}
+
+.btn-back {
+  background: transparent;
+  border: 1.5px solid #6aaa8a;
+  color: #6aaa8a;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-back:hover { background: #6aaa8a; color: #fff; }
+
+/* ── Layout ── */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .checkout-layout { grid-template-columns: 1fr; }
+  .order-summary { order: -1; }
+}
+
+/* ── Form ── */
+.checkout-form { display: flex; flex-direction: column; gap: 24px; }
+
+.form-section {
+  background: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4a4035;
+  margin: 0 0 24px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid #ede9e2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+.field-group.full { grid-column: 1 / -1; }
+
+.field-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6aaa8a;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.field-group input,
+.field-group textarea {
+  border: 1.5px solid #e0dbd2;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: #4a4035;
+  background: #faf8f5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.field-group input:focus,
+.field-group textarea:focus {
+  border-color: #6aaa8a;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(106,170,138,0.12);
+}
+
+.field-group input.error { border-color: #e07070; box-shadow: 0 0 0 3px rgba(224,112,112,0.1); }
+.field-group textarea { resize: vertical; }
+
+.expiry-row { display: flex; align-items: center; gap: 8px; }
+.expiry-row input { width: 72px; text-align: center; }
+.expiry-sep { font-size: 1.3rem; color: #c8bfaf; font-weight: 300; }
+
+.err {
+  font-size: 0.75rem;
+  color: #c0392b;
+}
+
+/* ── Terms ── */
+.terms-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.terms-box input[type="checkbox"] {
+  accent-color: #6aaa8a;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.terms-box label {
+  font-size: 0.88rem;
+  color: #5a4a38;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* ── Actions ── */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-reset {
+  background: none;
+  border: 1.5px solid #d8d0c4;
+  color: #a89880;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { border-color: #a89880; color: #5a4a38; }
+
+.btn-primary {
+  background: #6aaa8a;
+  color: #fff;
+  border: none;
+  padding: 14px 44px;
+  border-radius: 30px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 4px 16px rgba(106,170,138,0.3);
+}
+.btn-primary:hover { background: #4e9070; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+/* ── Order Summary ── */
+.order-summary {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  position: sticky;
+  top: 100px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.summary-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #4a4035;
+  margin: 0 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid #ede9e2;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.summary-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #e8e4dc;
+  flex-shrink: 0;
+}
+
+.summary-item-details { flex: 1; }
+.summary-item-name { font-size: 0.85rem; font-weight: 600; color: #4a4035; display: block; }
+.summary-item-qty { font-size: 0.78rem; color: #a89880; }
+.summary-item-price { font-size: 0.88rem; font-weight: 700; color: #4a4035; }
+
+.summary-divider { border: none; border-top: 1px solid #ede9e2; margin: 14px 0; }
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #7a6e62;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.free { color: #6aaa8a; font-weight: 600; }
+
+.total-row {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #4a4035;
+  margin-top: 4px;
+}
+
+/* ── Success ── */
+.success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 40px;
+}
+
+.success-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 60px 50px;
+  text-align: center;
+  max-width: 460px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.success-icon {
+  width: 72px;
+  height: 72px;
+  background: #6aaa8a;
+  color: #fff;
+  font-size: 2.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.success-box h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  color: #4a4035;
+  margin-bottom: 12px;
+}
+
+.success-box p { color: #a89880; font-size: 1rem; margin-bottom: 32px; }

@@ -1,0 +1,213 @@
+<div class="registration-container">
+  <div class="registration-card">
+    <!-- Logo & Header -->
+    <div class="registration-header">
+      <div class="logo">
+        <span class="logo-icon">🧳</span>
+        <span class="logo-text">SHOSHA <span class="logo-vibe">STORE</span></span>
+      </div>
+      <h1>Create Account</h1>
+      <p class="subtitle">Join thousands of customers</p>
+    </div>
+
+    <!-- Profile Photo Upload -->
+    <div class="profile-photo-section">
+      <div class="photo-preview-container">
+        <img [src]="profilePhotoPreview()" alt="Profile Photo" class="profile-photo-preview">
+        <label for="photoInput" class="photo-upload-label">
+          <i class="camera-icon">📷</i>
+        </label>
+        <input 
+          type="file" 
+          id="photoInput" 
+          accept="image/*" 
+          (change)="onPhotoSelected($event)"
+          hidden
+        >
+      </div>
+      <p class="photo-label">UPLOAD PROFILE PHOTO</p>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+      
+      <!-- Name Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">FULL NAME</label>
+          <div class="input-wrapper">
+            <i class="input-icon">👤</i>
+            <input 
+              type="text" 
+              id="firstName" 
+              formControlName="firstName"
+              placeholder="First Name"
+              class="form-input"
+            >
+          </div>
+          <span class="error-text" *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
+            First name is required (min 2 characters)
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName" style="visibility: hidden;">Last Name</label>
+          <div class="input-wrapper">
+            <i class="input-icon">👤</i>
+            <input 
+              type="text" 
+              id="lastName" 
+              formControlName="lastName"
+              placeholder="Last Name"
+              class="form-input"
+            >
+          </div>
+          <span class="error-text" *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
+            Last name is required (min 2 characters)
+          </span>
+        </div>
+      </div>
+
+      <!-- Username Row -->
+      <div class="form-group">
+        <label for="userName">USERNAME</label>
+        <div class="input-wrapper">
+          <i class="input-icon">@</i>
+          <input 
+            type="text" 
+            id="userName" 
+            formControlName="userName"
+            placeholder="Choose a username"
+            class="form-input"
+          >
+        </div>
+        <span class="error-text" *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
+          Username is required (min 2 characters)
+        </span>
+      </div>
+
+      <!-- Phone & Email Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phoneNumber">PHONE</label>
+          <div class="input-wrapper">
+            <i class="input-icon">📱</i>
+            <input 
+              type="tel" 
+              id="phoneNumber" 
+              formControlName="phoneNumber"
+              placeholder="050-0000000"
+              class="form-input"
+            >
+          </div>
+          <span class="error-text" *ngIf="registrationForm.get('phoneNumber')?.invalid && registrationForm.get('phoneNumber')?.touched">
+            Valid phone number required (10+ digits)
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="tz" style="visibility: hidden;">ID</label>
+          <div class="input-wrapper">
+            <i class="input-icon">🆔</i>
+            <input 
+              type="text" 
+              id="tz" 
+              formControlName="tz"
+              placeholder="Israeli ID (optional)"
+              class="form-input"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="mail">EMAIL</label>
+        <div class="input-wrapper">
+          <i class="input-icon">✉️</i>
+          <input 
+            type="email" 
+            id="mail" 
+            formControlName="mail"
+            placeholder="your@email.com"
+            class="form-input"
+          >
+        </div>
+        <span class="error-text" *ngIf="registrationForm.get('mail')?.invalid && registrationForm.get('mail')?.touched">
+          Valid email is required
+        </span>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">PASSWORD</label>
+        <div class="input-wrapper">
+          <i class="input-icon">🔒</i>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password"
+            placeholder="Min 6 characters"
+            class="form-input"
+          >
+        </div>
+        <span class="error-text" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+          Password must be at least 6 characters
+        </span>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword">CONFIRM PASSWORD</label>
+        <div class="input-wrapper">
+          <i class="input-icon">🔒</i>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            class="form-input"
+          >
+        </div>
+        <span class="error-text" *ngIf="registrationForm.hasError('passwordMismatch') && registrationForm.get('confirmPassword')?.touched">
+          Passwords do not match
+        </span>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-alert" *ngIf="errorMessage()">
+        <span>❌ {{ errorMessage() }}</span>
+      </div>
+
+      <!-- Success Message -->
+      <div class="success-alert" *ngIf="successMessage()">
+        <span>✅ {{ successMessage() }}</span>
+      </div>
+
+      <!-- Buttons -->
+      <div class="form-buttons">
+        <button 
+          type="submit" 
+          class="btn-primary"
+          [disabled]="registrationForm.invalid || isLoading()"
+        >
+          <span *ngIf="!isLoading()">Create Account</span>
+          <span *ngIf="isLoading()">Creating...</span>
+        </button>
+        <button 
+          type="button" 
+          class="btn-secondary"
+          (click)="clearForm()"
+        >
+          Clear
+        </button>
+      </div>
+
+      <!-- Login Link -->
+      <p class="login-link">
+        Already have an account? 
+        <a href="/login" class="link-text">Sign in here</a>
+      </p>
+    </form>
+  </div>
+</div>

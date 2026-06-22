@@ -1,0 +1,105 @@
+<nav class="navbar">
+  <div class="navbar-logo">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <img src="/images/favicon.png" alt="SHOSHA" class="logo-img">
+    </a>
+  </div>
+
+  <ul class="navbar-links">
+    <li class="dropdown" [class.open]="openDropdown === 'tablecloths'" (click)="$event.stopPropagation()">
+      <a
+        [routerLink]="['/products', '6a09be509fe9dc6768673992']"
+        class="dropdown-toggle"
+        (click)="toggleDropdown('tablecloths', $event)"
+      >
+        Tablecloths and Napkins
+      </a>
+      <ul class="dropdown-menu">
+        <li><a [routerLink]="['/products', '6a09d6459fe9dc67686739a3']" (click)="closeDropdown()">Tablecloths</a></li>
+        <li><a [routerLink]="['/products', '6a09bee19fe9dc6768673994']" (click)="closeDropdown()">Napkins</a></li>
+        <li><a routerLink="/all-category" (click)="closeDropdown()">For all the Tablecloths and Napkins</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown" [class.open]="openDropdown === 'tableware'" (click)="$event.stopPropagation()">
+      <a
+        [routerLink]="['/products', '6a09bc2f9fe9dc6768673990']"
+        class="dropdown-toggle"
+        (click)="toggleDropdown('tableware', $event)"
+      >
+        Tableware
+      </a>
+      <ul class="dropdown-menu">
+        <li><a [routerLink]="['/products', '6a09bb409fe9dc676867398d']" (click)="closeDropdown()">Plates</a></li>
+        <li><a [routerLink]="['/products', '6a09d5ed9fe9dc67686739a0']" (click)="closeDropdown()">Cups</a></li>
+        <li><a [routerLink]="['/products', '6a09d6289fe9dc67686739a1']" (click)="closeDropdown()">Cutlery</a></li>
+        <li><a [routerLink]="['/products', '6a09d6379fe9dc67686739a2']" (click)="closeDropdown()">Serving utensils</a></li>
+        <li><a routerLink="/all-category" (click)="closeDropdown()">For all the Tableware</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown" [class.open]="openDropdown === 'accessories'" (click)="$event.stopPropagation()">
+      <a
+        [routerLink]="['/products', '6a09be7b9fe9dc6768673993']"
+        class="dropdown-toggle"
+        (click)="toggleDropdown('accessories', $event)"
+      >
+        Accessories
+      </a>
+      <ul class="dropdown-menu">
+        <li><a [routerLink]="['/products', '6a09d6549fe9dc67686739a4']" (click)="closeDropdown()">Vases</a></li>
+        <li><a [routerLink]="['/products', '6a09bc5a9fe9dc6768673991']" (click)="closeDropdown()">Napkin holders</a></li>
+        <li><a routerLink="/all-category" (click)="closeDropdown()">For all the Accessories</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a routerLink="/about" routerLinkActive="active">About us</a>
+    </li>
+
+    <!-- cart icon -->
+    <li class="cart-icon-wrapper">
+      <a routerLink="/cart" class="cart-link">
+        🛒
+        @if (cartService.totalItems() > 0) {
+          <span class="cart-badge">{{ cartService.totalItems() }}</span>
+        }
+      </a>
+    </li>
+
+    <!-- logged in -->
+    @if (userService.currentUser()) {
+      <li class="dropdown user-menu"
+          [class.open]="openDropdown === 'user'"
+          (click)="$event.stopPropagation()">
+
+        <a class="dropdown-toggle user-toggle" (click)="toggleDropdown('user', $event)">
+          <img
+            [src]="userService.currentUser()?.profilePhoto || ('https://ui-avatars.com/api/?name=' + userService.currentUser()?.firstName + '+' + userService.currentUser()?.lastName + '&background=7aab8a&color=fff&size=200')"
+            alt="avatar"
+            class="nav-avatar"
+          >
+          <span class="nav-username">{{ userService.currentUser()?.firstName }}</span>
+          <span class="arrow">▾</span>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li><a routerLink="/profile" (click)="closeDropdown()">My Profile</a></li>
+          <li><a routerLink="/cart" (click)="closeDropdown()">My Cart</a></li>
+          <li class="divider-item"></li>
+          <li>
+            <a (click)="userService.logout(); closeDropdown()" class="logout-link">Logout</a>
+          </li>
+        </ul>
+      </li>
+    }
+
+    <!-- not logged in -->
+    @if (!userService.currentUser()) {
+      <li>
+        <a routerLink="/auth" routerLinkActive="active">Login</a>
+      </li>
+    }
+
+  </ul>
+</nav>

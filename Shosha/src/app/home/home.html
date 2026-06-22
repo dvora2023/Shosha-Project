@@ -1,0 +1,51 @@
+<div class="home">
+  <div class="hero">
+    <h1>Hospitality is not just a meal.</h1>
+    <p>There is everything you need to host like in a real production.<br>
+      Amazing combinations of dishes and accessories, handmade tablecloths and unique items<br>
+      that turn every meal and entertainment into a celebration of art and imagination.
+    </p>
+    <a routerLink="/all-category" class="hero-btn">For all the products</a>
+  </div>
+
+  <div class="slider">
+  <img [src]="images[currentIndex()]"
+       [class.fade-in]="isVisible()"
+       [class.fade-out]="!isVisible()"
+       alt="table">
+</div>
+
+  <h2 class="categories-title">Categories</h2>
+
+  <div class="categories-grid">
+    <div class="category-card" routerLink="/tablecloths">
+      <img src="images/allimages/HomePage/Tablecloths_and_napkins.png" alt="Tablecloths and napkins">
+      <div class="category-label">Tablecloths and napkins</div>
+    </div>
+
+    <div class="category-card" routerLink="/plates">
+      <img src="images/allimages/HomePage/Plates.jpg" alt="Plates">
+      <div class="category-label">Plates</div>
+    </div>
+
+    <div class="category-card" routerLink="/tableware">
+      <img src="images/allimages/HomePage/Tableware.jpg" alt="Tableware">
+      <div class="category-label">Tableware</div>
+    </div>
+
+    <div class="category-card" routerLink="/napkin-holders">
+      <img src="images/allimages/HomePage/Napkin_holders.png" alt="Napkin holders">
+      <div class="category-label">Napkin holders</div>
+    </div>
+
+    <div class="category-card" routerLink="/accessories">
+      <img src="images/allimages/HomePage/Accessories.jpg" alt="Accessories">
+      <div class="category-label">Accessories</div>
+    </div>
+
+    <div class="category-card" routerLink="/serving-utensils">
+      <img src="images/allimages/HomePage/Serving_utensils.jpg" alt="Serving utensils">
+      <div class="category-label">Serving utensils</div>
+    </div>
+  </div>
+</div>

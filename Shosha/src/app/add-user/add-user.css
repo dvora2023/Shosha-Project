@@ -1,0 +1,355 @@
+/* Registration Container */
+.registration-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8f0f9 0%, #f5f5f5 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Registration Card */
+.registration-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 650px;
+  width: 100%;
+}
+
+/* Header */
+.registration-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo-icon {
+  font-size: 32px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #003d82;
+  letter-spacing: 1px;
+}
+
+.logo-vibe {
+  color: #7ca8c9;
+  font-style: italic;
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.registration-header h1 {
+  font-size: 32px;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Profile Photo Section */
+.profile-photo-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.photo-preview-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 12px;
+}
+
+.profile-photo-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.profile-photo-preview:hover {
+  border-color: #0055b8;
+  box-shadow: 0 0 20px rgba(0, 85, 184, 0.3);
+}
+
+.photo-upload-label {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: #0055b8;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  border: 3px solid white;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 85, 184, 0.4);
+}
+
+.photo-upload-label:hover {
+  background: #003d82;
+  transform: scale(1.1);
+}
+
+.camera-icon {
+  filter: brightness(0) invert(1);
+}
+
+.photo-label {
+  color: #7ca8c9;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Form */
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5a7a8f;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 18px;
+  color: #999;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.3s ease;
+  background: #f9f9f9;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #0055b8;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(0, 85, 184, 0.1);
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+/* Error Text */
+.error-text {
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: 4px;
+  display: none;
+}
+
+.form-input:invalid:not(:placeholder-shown) + .error-text {
+  display: block;
+}
+
+/* Error Alert */
+.error-alert {
+  background: #ffebee;
+  border: 2px solid #ef5350;
+  border-radius: 8px;
+  padding: 12px 15px;
+  color: #c62828;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideIn 0.3s ease;
+}
+
+/* Success Alert */
+.success-alert {
+  background: #e8f5e9;
+  border: 2px solid #66bb6a;
+  border-radius: 8px;
+  padding: 12px 15px;
+  color: #2e7d32;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideIn 0.3s ease;
+}
+
+/* Buttons */
+.form-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: #0055b8;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #003d82;
+  box-shadow: 0 5px 15px rgba(0, 85, 184, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+  border: 2px solid #e0e0e0;
+}
+
+.btn-secondary:hover {
+  background: #e8e8e8;
+  border-color: #d0d0d0;
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.link-text {
+  color: #0055b8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.link-text:hover {
+  color: #003d82;
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .registration-card {
+    padding: 25px;
+  }
+
+  .registration-header h1 {
+    font-size: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-container {
+    padding: 10px;
+  }
+
+  .registration-card {
+    padding: 20px;
+  }
+
+  .registration-header h1 {
+    font-size: 20px;
+  }
+
+  .form-input {
+    font-size: 16px;
+  }
+}

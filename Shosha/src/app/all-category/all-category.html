@@ -1,0 +1,11 @@
+<div class="category-page">
+  <h1 class="page-title">All Categories</h1>
+
+  <div class="category-grid">
+    @for (item of arr; track item.id) {
+      <div class="category-card" (click)="nav(item.id)">
+        <h3 class="category-name">{{ item.name }}</h3>
+      </div>
+    }
+  </div>
+</div>

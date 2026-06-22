@@ -1,0 +1,35 @@
+<div class="detail-page">
+  @if (product()) {
+    <button class="btn-back" (click)="goBack()">← Back</button>
+
+    <div class="detail-card">
+      <div class="detail-image">
+        <img [src]="product().image" [alt]="product().name">
+      </div>
+
+      <div class="detail-info">
+        <h1 class="detail-name">{{ product().name }}</h1>
+        <p class="detail-price">{{ product().price }}₪</p>
+
+        <div class="quantity-section">
+          <label>Quantity:</label>
+          <div class="quantity-controls">
+            <button (click)="quantity() > 1 ? quantity.set(quantity() - 1) : null">−</button>
+            <span>{{ quantity() }}</span>
+            <button (click)="quantity.set(quantity() + 1)">+</button>
+          </div>
+        </div>
+
+        <button class="btn-add-cart" (click)="addToCart()">
+          🛒 Add to Cart
+        </button>
+
+        @if (added()) {
+          <div class="success-msg">✓ Added to cart!</div>
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="not-found">Product not found.</p>
+  }
+</div>

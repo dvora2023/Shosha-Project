@@ -1,0 +1,187 @@
+<div class="checkout-page">
+
+  <div class="checkout-header">
+    <button class="btn-back" (click)="backToCart()">← Back to Cart</button>
+    <h1 class="checkout-title">Order Details</h1>
+  </div>
+
+  <div class="checkout-layout">
+
+ <form class="checkout-form" [formGroup]="form" (ngSubmit)="submitOrder()">
+
+      <!-- Contact & Shipping -->
+      <div class="form-section">
+        <div class="section-title">Contact & Shipping Details</div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>First Name</label>
+            <input type="text" placeholder="First Name"
+              [formControl]="f['firstName']"
+              [class.error]="submitted && f['firstName'].invalid">
+            @if (submitted && f['firstName'].errors?.['required']) {
+              <span class="err">Required</span>
+            }
+          </div>
+          <div class="field-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last Name"
+              [formControl]="f['lastName']"
+              [class.error]="submitted && f['lastName'].invalid">
+            @if (submitted && f['lastName'].errors?.['required']) {
+              <span class="err">Required</span>
+            }
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>Mobile Phone</label>
+            <input type="tel" placeholder="Mobile Number"
+              [formControl]="f['phone']"
+              [class.error]="submitted && f['phone'].invalid">
+            @if (submitted && f['phone'].errors?.['required']) { <span class="err">Required</span> }
+            @if (submitted && f['phone'].errors?.['pattern']) { <span class="err">Invalid phone number</span> }
+          </div>
+          <div class="field-group">
+            <label>Email</label>
+            <input type="email" placeholder="Email address"
+              [formControl]="f['email']"
+              [class.error]="submitted && f['email'].invalid">
+            @if (submitted && f['email'].errors?.['required']) { <span class="err">Required</span> }
+            @if (submitted && f['email'].errors?.['email']) { <span class="err">Invalid email</span> }
+          </div>
+        </div>
+
+        <div class="field-group full">
+          <label>Address (Street and House Number)</label>
+          <input type="text" placeholder="Street and house number"
+            [formControl]="f['address']"
+            [class.error]="submitted && f['address'].invalid">
+          @if (submitted && f['address'].errors?.['required']) { <span class="err">Required</span> }
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>City</label>
+            <input type="text" placeholder="City"
+              [formControl]="f['city']"
+              [class.error]="submitted && f['city'].invalid">
+            @if (submitted && f['city'].errors?.['required']) { <span class="err">Required</span> }
+          </div>
+          <div class="field-group">
+            <label>Zip Code (optional)</label>
+            <input type="text" placeholder="Zip Code" [formControl]="f['zipCode']">
+          </div>
+        </div>
+
+        <div class="field-group full">
+          <label>Apt., Floor, Entrance (optional)</label>
+          <input type="text" placeholder="Apt. No., Floor, Entrance..." [formControl]="f['apartment']">
+        </div>
+
+        <div class="field-group full">
+          <label>Additional Shipping Notes (optional)</label>
+          <textarea rows="2" placeholder="e.g. call before arrival..." [formControl]="f['notes']"></textarea>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="form-section">
+        <div class="section-title">Payment Details</div>
+
+        <div class="field-group full">
+          <label>Credit Card Number</label>
+          <input type="text" placeholder="16 digits"
+            [formControl]="f['cardNumber']"
+            [class.error]="submitted && f['cardNumber'].invalid">
+          @if (submitted && f['cardNumber'].errors?.['required']) { <span class="err">Required</span> }
+          @if (submitted && f['cardNumber'].errors?.['pattern']) { <span class="err">Enter a valid card number (13–16 digits)</span> }
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>Cardholder Full Name</label>
+            <input type="text" placeholder="Name on card"
+              [formControl]="f['cardName']"
+              [class.error]="submitted && f['cardName'].invalid">
+            @if (submitted && f['cardName'].errors?.['required']) { <span class="err">Required</span> }
+          </div>
+          <div class="field-group">
+            <label>Cardholder ID / Passport No.</label>
+            <input type="text" placeholder="ID / Passport No."
+              [formControl]="f['cardId']"
+              [class.error]="submitted && f['cardId'].invalid">
+            @if (submitted && f['cardId'].errors?.['required']) { <span class="err">Required</span> }
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>Expiration Date</label>
+            <div class="expiry-row">
+              <input type="text" placeholder="MM" maxlength="2"
+                [formControl]="f['expMonth']"
+                [class.error]="submitted && f['expMonth'].invalid">
+              <span class="expiry-sep">/</span>
+              <input type="text" placeholder="YY" maxlength="2"
+                [formControl]="f['expYear']"
+                [class.error]="submitted && f['expYear'].invalid">
+            </div>
+            @if (submitted && (f['expMonth'].invalid || f['expYear'].invalid)) {
+              <span class="err">Enter valid expiry (MM / YY)</span>
+            }
+          </div>
+          <div class="field-group">
+            <label>CVV</label>
+            <input type="text" placeholder="3 or 4 digits" maxlength="4"
+              [formControl]="f['cvv']"
+              [class.error]="submitted && f['cvv'].invalid">
+            @if (submitted && f['cvv'].errors?.['required']) { <span class="err">Required</span> }
+            @if (submitted && f['cvv'].errors?.['pattern']) { <span class="err">3 or 4 digits</span> }
+          </div>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="terms-box">
+        <input type="checkbox" id="agreeTerms" [formControl]="f['agreeTerms']">
+        <label for="agreeTerms">
+          I confirm that I have read and agree to the <strong>Terms of Use</strong> and <strong>Privacy Policy</strong> of the site.
+        </label>
+      </div>
+      @if (submitted && f['agreeTerms'].invalid) {
+        <span class="err">You must agree to the terms to continue</span>
+      }
+
+      <div class="form-actions">
+        <button type="button" class="btn-reset" (click)="submitted = false; form.reset()">Reset Form</button>
+        <button type="submit" class="btn-primary">Place Order →</button>
+      </div>
+
+    </form>
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <div class="summary-title">Order Summary</div>
+
+      @for (item of cartService.items(); track item.product._id) {
+        <div class="summary-item">
+          <img [src]="item.product.image || 'assets/placeholder.png'" [alt]="item.product.name">
+          <div class="summary-item-details">
+            <span class="summary-item-name">{{ item.product.name }}</span>
+            <span class="summary-item-qty">x{{ item.quantity }}</span>
+          </div>
+          <span class="summary-item-price">₪{{ (item.product.price * item.quantity) | number:'1.2-2' }}</span>
+        </div>
+      }
+
+      <div class="summary-divider"></div>
+      <div class="summary-row"><span>Subtotal</span><span>₪{{ total() | number:'1.2-2' }}</span></div>
+      <div class="summary-row"><span>Shipping</span><span class="free">Free</span></div>
+      <div class="summary-divider"></div>
+      <div class="summary-row total-row"><span>Total</span><span>₪{{ total() | number:'1.2-2' }}</span></div>
+    </div>
+
+  </div>
+</div>

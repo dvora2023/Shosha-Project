@@ -1,0 +1,129 @@
+<div class="profile-page">
+
+  <div class="profile-container">
+
+    <!-- Header -->
+    <div class="profile-header">
+      <h1 class="profile-title">My Profile</h1>
+      <button class="btn-logout" (click)="userService.logout()">Logout</button>
+    </div>
+
+    <!-- Photo Section -->
+    <div class="photo-section">
+      <div class="photo-wrapper">
+        <img [src]="photoPreview()" alt="Profile Photo" class="profile-photo">
+        @if (isEditing()) {
+          <label for="photoInput" class="photo-overlay">
+            <span class="photo-text">Change</span>
+          </label>
+          <input type="file" id="photoInput" accept="image/*"
+            (change)="onPhotoSelected($event)" hidden>
+        }
+      </div>
+      @if (isEditing() && selectedPhotoFile()) {
+        <button class="btn-remove-photo" (click)="removePhoto()">Remove Photo</button>
+      }
+      <div class="user-name-display">
+        {{ userService.currentUser()?.firstName }} {{ userService.currentUser()?.lastName }}
+      </div>
+      <div class="user-username">{{ userService.currentUser()?.userName }}</div>
+    </div>
+
+    <!-- Alerts -->
+    @if (successMessage()) {
+      <div class="alert alert-success">{{ successMessage() }}</div>
+    }
+    @if (errorMessage()) {
+      <div class="alert alert-error">{{ errorMessage() }}</div>
+    }
+
+    <!-- View Mode -->
+    @if (!isEditing()) {
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-label">First Name</span>
+          <span class="info-value">{{ userService.currentUser()?.firstName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Last Name</span>
+          <span class="info-value">{{ userService.currentUser()?.lastName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Username</span>
+          <span class="info-value">{{ userService.currentUser()?.userName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email</span>
+          <span class="info-value">{{ userService.currentUser()?.mail }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Phone</span>
+          <span class="info-value">{{ userService.currentUser()?.phoneNumber }}</span>
+        </div>
+      </div>
+
+      <button class="btn-edit" (click)="startEditing()">Edit Profile</button>
+
+    } @else {
+
+      <!-- Edit Mode -->
+      <form [formGroup]="form" (ngSubmit)="saveChanges()" class="edit-form">
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>First Name</label>
+            <input type="text" formControlName="firstName" placeholder="First Name"
+              [class.error]="f['firstName'].invalid && f['firstName'].touched">
+            @if (f['firstName'].invalid && f['firstName'].touched) {
+              <span class="err">Required (min 2 chars)</span>
+            }
+          </div>
+          <div class="field-group">
+            <label>Last Name</label>
+            <input type="text" formControlName="lastName" placeholder="Last Name"
+              [class.error]="f['lastName'].invalid && f['lastName'].touched">
+            @if (f['lastName'].invalid && f['lastName'].touched) {
+              <span class="err">Required (min 2 chars)</span>
+            }
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Username</label>
+          <input type="text" formControlName="userName" placeholder="Username"
+            [class.error]="f['userName'].invalid && f['userName'].touched">
+          @if (f['userName'].invalid && f['userName'].touched) {
+            <span class="err">Required (min 2 chars)</span>
+          }
+        </div>
+
+        <div class="field-group">
+          <label>Phone</label>
+          <input type="tel" formControlName="phoneNumber" placeholder="0500000000"
+            [class.error]="f['phoneNumber'].invalid && f['phoneNumber'].touched">
+          @if (f['phoneNumber'].invalid && f['phoneNumber'].touched) {
+            <span class="err">Valid phone required</span>
+          }
+        </div>
+
+        <div class="field-group">
+          <label>Email</label>
+          <input type="email" formControlName="mail" placeholder="your@email.com"
+            [class.error]="f['mail'].invalid && f['mail'].touched">
+          @if (f['mail'].invalid && f['mail'].touched) {
+            <span class="err">Valid email required</span>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" (click)="cancelEditing()">Cancel</button>
+          <button type="submit" class="btn-save" [disabled]="form.invalid || isSaving()">
+            {{ isSaving() ? 'Saving...' : 'Save Changes' }}
+          </button>
+        </div>
+
+      </form>
+    }
+
+  </div>
+</div>

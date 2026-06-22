@@ -1,0 +1,191 @@
+<div class="auth-wrapper">
+  <div class="auth-card" [class.flipped]="isLoginMode">
+
+    <!-- REGISTER SIDE -->
+    <div class="card-face card-front">
+      <div class="card-header">
+        <div class="logo-circle">✦</div>
+        <h1>Create Account</h1>
+        <p class="subtitle">Join us today</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
+
+        <!-- Avatar Upload -->
+        <div class="avatar-upload-section" (click)="fileInput.click()">
+          <div class="avatar-preview" [style.backgroundImage]="avatarPreview ? 'url(' + avatarPreview + ')' : 'none'">
+            <div class="avatar-placeholder" *ngIf="!avatarPreview">
+              <span class="avatar-icon">📷</span>
+              <span class="avatar-text">Upload Photo</span>
+            </div>
+            <div class="avatar-overlay" *ngIf="avatarPreview">
+              <span>Change Photo</span>
+            </div>
+          </div>
+          <input #fileInput type="file" accept="image/*" (change)="onImageSelected($event)" hidden />
+        </div>
+
+        <!-- First Name -->
+        <div class="field-group">
+          <label>First Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" formControlName="firstName" placeholder="John" dir="ltr" />
+          </div>
+          <div class="error-msg" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+            First name is required
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="field-group">
+          <label>Last Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" formControlName="lastName" placeholder="Doe" dir="ltr" />
+          </div>
+          <div class="error-msg" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+            Last name is required
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="field-group">
+          <label>Username</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🪪</span>
+            <input type="text" formControlName="userName" placeholder="john123" dir="ltr" />
+          </div>
+          <div class="error-msg" *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched">
+            Username is required
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="field-group">
+          <label>Phone</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📱</span>
+            <input type="tel" formControlName="phoneNumber" placeholder="0500000000" dir="ltr" />
+          </div>
+          <div class="error-msg" *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched">
+            Invalid phone number
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="field-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input type="email" formControlName="mail" placeholder="john@example.com" dir="ltr" />
+          </div>
+          <div class="error-msg" *ngIf="registerForm.get('mail')?.invalid && registerForm.get('mail')?.touched">
+            Invalid email address
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="field-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input [type]="showRegPassword ? 'text' : 'password'" formControlName="password" placeholder="At least 6 characters" dir="ltr" />
+            <button type="button" class="toggle-password" (click)="showRegPassword = !showRegPassword">
+              {{ showRegPassword ? '🙈' : '👁️' }}
+            </button>
+          </div>
+          <div class="password-strength" *ngIf="registerForm.get('password')?.value">
+            <div class="strength-bar">
+              <div class="strength-fill" [style.width]="getPasswordStrength() + '%'" [class]="getPasswordStrengthClass()"></div>
+            </div>
+            <span class="strength-label">{{ getPasswordStrengthLabel() }}</span>
+          </div>
+          <div class="error-msg" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+            Password must be at least 6 characters
+          </div>
+        </div>
+
+        <div class="error-banner" *ngIf="loginError">
+          {{ loginError }}
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="registerForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Sign Up ✦</span>
+          <span *ngIf="isLoading" class="loading-dots">Loading...</span>
+        </button>
+
+        <div class="divider"><span>Already have an account?</span></div>
+
+        <button type="button" class="btn-secondary" (click)="switchMode()">
+          Log In →
+        </button>
+
+      </form>
+    </div>
+
+    <!-- LOGIN SIDE -->
+    <div class="card-face card-back">
+      <div class="card-header">
+        <div class="logo-circle">✦</div>
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Log in to your account</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+
+        <!-- Email -->
+        <div class="field-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input type="email" formControlName="email" placeholder="john@example.com" dir="ltr" />
+          </div>
+          <div class="error-msg" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            Invalid email address
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="field-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input [type]="showLoginPassword ? 'text' : 'password'" formControlName="password" placeholder="Enter password" dir="ltr" />
+            <button type="button" class="toggle-password" (click)="showLoginPassword = !showLoginPassword">
+              {{ showLoginPassword ? '🙈' : '👁️' }}
+            </button>
+          </div>
+          <div class="error-msg" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            Password is required
+          </div>
+        </div>
+
+        <div class="forgot-password">
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <div class="error-banner" *ngIf="loginError">
+          {{ loginError }}
+        </div>
+
+        <div class="success-banner" *ngIf="loginSuccess">
+          {{ loginSuccess }}
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Log In ✦</span>
+          <span *ngIf="isLoading">Loading...</span>
+        </button>
+
+        <div class="divider"><span>Don't have an account?</span></div>
+
+        <button type="button" class="btn-secondary" (click)="switchMode()">
+          Sign Up →
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</div>

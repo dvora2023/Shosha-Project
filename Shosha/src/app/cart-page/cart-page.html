@@ -1,0 +1,101 @@
+<div class="cart-page">
+
+  <div class="cart-header">
+    <h1 class="cart-title">My Cart</h1>
+    <span class="cart-count" *ngIf="items().length > 0">
+      {{ cartService.totalItems() }} items
+    </span>
+  </div>
+
+  <!-- סל ריק -->
+  @if (items().length === 0) {
+    <div class="empty-cart">
+      <div class="empty-icon">🛒</div>
+      <h2>Your cart is empty</h2>
+      <p>Looks like you haven't added anything yet.</p>
+      <button class="btn-continue" (click)="continueShopping()">
+        Start Shopping
+      </button>
+    </div>
+  }
+
+  <!-- סל עם פריטים -->
+  @if (items().length > 0) {
+    <div class="cart-layout">
+
+      <!-- רשימת מוצרים -->
+      <div class="cart-items">
+        @for (item of items(); track item.product._id) {
+          <div class="cart-item">
+            <div class="item-image">
+              <img
+                [src]="item.product.image || 'assets/placeholder.png'"
+                [alt]="item.product.name"
+              />
+            </div>
+
+            <div class="item-details">
+              <h3 class="item-name">{{ item.product.name }}</h3>
+              <p class="item-price">₪{{ item.product.price | number:'1.2-2' }}</p>
+            </div>
+
+            <div class="item-qty">
+              <button class="qty-btn" (click)="decreaseQty(item.product._id)">−</button>
+              <span class="qty-value">{{ item.quantity }}</span>
+              <button class="qty-btn" (click)="increaseQty(item.product._id)">+</button>
+            </div>
+
+            <div class="item-subtotal">
+              ₪{{ (item.product.price * item.quantity) | number:'1.2-2' }}
+            </div>
+
+            <button class="remove-btn" (click)="removeItem(item.product._id)" title="Remove">
+              ✕
+            </button>
+          </div>
+        }
+
+        <div class="cart-actions-bottom">
+          <button class="btn-continue" (click)="continueShopping()">
+            ← Continue Shopping
+          </button>
+          <button class="btn-clear" (click)="clearCart()">
+            Clear Cart
+          </button>
+        </div>
+      </div>
+
+      <!-- סיכום הזמנה -->
+      <div class="order-summary">
+        <h2 class="summary-title">Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Subtotal ({{ cartService.totalItems() }} items)</span>
+          <span>₪{{ total() | number:'1.2-2' }}</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="free-shipping">Free</span>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <span>₪{{ total() | number:'1.2-2' }}</span>
+        </div>
+
+        <button class="btn-checkout" (click)="goToCheckout()">
+          Proceed to Checkout →
+        </button>
+
+        <div class="secure-note">
+          🔒 Secure checkout
+        </div>
+      </div>
+
+    </div>
+  }
+
+</div>
