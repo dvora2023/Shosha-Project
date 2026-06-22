@@ -1,8 +1,7 @@
 {
   "version": 2,
   "public": true,
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/dist/Shosha/browser/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
